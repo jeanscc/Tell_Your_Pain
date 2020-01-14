@@ -5,7 +5,7 @@ class MainPage extends StatelessWidget {
     "Questionário Diário",
     "Avaliação Do Dia",
     "Chat Da Turma",
-    "Deslogar"
+    "Sair"
   ];
   var images = [
     'images/icones_home/questionario.png',
