@@ -1,3 +1,5 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 class PerguntaPage extends StatefulWidget {
@@ -6,8 +8,126 @@ class PerguntaPage extends StatefulWidget {
 }
 
 class _PerguntaPageState extends State<PerguntaPage> {
+  int _index = 0;
+
+  String _perguntaAtual = '';
+  final Map _emojis = {
+    'emoji1': '',
+    'emoji2': '',
+    'emoji3': '',
+    'emoji4': '',
+    'emoji5': ''
+  };
+
+  final Map _imgsEmoji = {
+    'emoji1': 'images/Triste.png',
+    'emoji2': 'images/Chateado.png',
+    'emoji3': 'images/Normal.png',
+    'emoji4': 'images/Feliz.png',
+    'emoji5': 'images/Muito Feliz.png'
+  };
+
+  final _emojisName = [
+    'Muito triste',
+    'Triste',
+    'Normal',
+    'Feliz',
+    'Muito feliz'
+  ];
+
+  final _emojisName2 = ['Muito ruim', 'Ruim', 'Normal', 'Bom', 'Muito bom'];
+
+  final _emojisName3 = [
+    'Familia',
+    'Amigos',
+    'Relacionamento',
+    'Escola',
+    'Trabalho',
+  ];
+
+  final Map<String, dynamic> _mapa = {
+    'pergunta6': '',
+    'pergunta1': '',
+    'pergunta2': '',
+    'pergunta3': '',
+    'pergunta4': '',
+    'pergunta5': '',
+    'data': Timestamp.now()
+  };
+
+  final _perguntas = [
+    '1) Como você avalia o cumprimento de suas tarefas hoje?',
+    '2) Como você se sentiu fisicamente hoje?',
+    '3) Como você se sentiu emocionalmente e mentalmente hoje?',
+    '4) Como você avalia seu dia?',
+    '5) Escolha uma coisa que contribuiu negativamente para seu dia.',
+    '6) Escolha uma coisa que contribuiu positivamente para seu dia.',
+  ];
+  final _respostas = [
+    'Muito triste',
+    'Triste',
+    'Normal',
+    'Feliz',
+    'Muito feliz',
+  ];
+
+  void _ouvinte(int numero) {
+    if (_index == 0 || _index == 1) {
+      _mapa['pergunta' + _index.toString()] = _emojisName2[numero];
+    } else if (_index == 2 || _index == 3) {
+      _mapa['pergunta' + _index.toString()] = _respostas[numero];
+    } else {
+      _mapa['pergunta' + _index.toString()] = _emojisName3[numero];
+    }
+    if (_index == 5) {
+      _registrarResposta(_mapa);
+      Navigator.of(context).pop();
+    } else {
+      _index += 1;
+    }
+  }
+
+  void _registrarResposta(Map<String, dynamic> mapa) async {
+    FirebaseUser user = await FirebaseAuth.instance.currentUser();
+    Firestore.instance
+        .collection('users')
+        .document(user.uid)
+        .collection('questionarios')
+        .add(mapa);
+  }
+
+  void _atualizarPergunta() {
+    if (_index == 0 || _index == 1) {
+      _emojis['emoji1'] = _emojisName2[0];
+      _emojis['emoji2'] = _emojisName2[1];
+      _emojis['emoji3'] = _emojisName2[2];
+      _emojis['emoji4'] = _emojisName2[3];
+      _emojis['emoji5'] = _emojisName2[4];
+    } else if (_index == 2 || _index == 3) {
+      _emojis['emoji1'] = _emojisName[0];
+      _emojis['emoji2'] = _emojisName[1];
+      _emojis['emoji3'] = _emojisName[2];
+      _emojis['emoji4'] = _emojisName[3];
+      _emojis['emoji5'] = _emojisName[4];
+    } else {
+      _imgsEmoji['emoji1'] = 'images/familia.png';
+      _imgsEmoji['emoji2'] = 'images/amigos.png';
+      _imgsEmoji['emoji3'] = 'images/relacionamento.png';
+      _imgsEmoji['emoji4'] = 'images/escola.png';
+      _imgsEmoji['emoji5'] = 'images/trabalho.png';
+      _emojis['emoji1'] = _emojisName3[0];
+      _emojis['emoji2'] = _emojisName3[1];
+      _emojis['emoji3'] = _emojisName3[2];
+      _emojis['emoji4'] = _emojisName3[3];
+      _emojis['emoji5'] = _emojisName3[4];
+    }
+    _perguntaAtual = _perguntas[_index];
+  }
+
   @override
   Widget build(BuildContext context) {
+    _atualizarPergunta();
+
     final logo = Hero(
       tag: 'hero',
       child: CircleAvatar(
@@ -29,7 +149,7 @@ class _PerguntaPageState extends State<PerguntaPage> {
             Padding(
               padding: EdgeInsets.only(left: 45),
               child: Text(
-                'De uma maneira geral, Como você está se sentindo hoje?',
+                _perguntaAtual,
                 style: TextStyle(fontSize: 26),
               ),
             ),
@@ -40,77 +160,121 @@ class _PerguntaPageState extends State<PerguntaPage> {
               children: <Widget>[
                 Column(
                   children: <Widget>[
-                    Padding(
-                      padding: EdgeInsets.only(left: 40),
-                      child: Image.asset(
-                        'images/Triste.png',
-                        height: 40,
-                        width: 40,
+                    InkWell(
+                      onTap: () {
+                        _ouvinte(0);
+
+                        setState(() {
+                          _atualizarPergunta();
+                        });
+                      },
+                      child: Padding(
+                        padding: EdgeInsets.only(left: 20),
+                        child: Image.asset(
+                          _imgsEmoji['emoji1'],
+                          height: 40,
+                          width: 40,
+                        ),
                       ),
                     ),
                     Padding(
-                        padding: EdgeInsets.only(left: 40),
-                        child: Text('Triste')),
+                        padding: EdgeInsets.only(left: 20),
+                        child: Text(_emojis['emoji1'])),
                   ],
                 ),
                 Column(
                   children: <Widget>[
-                    Padding(
-                      padding: EdgeInsets.only(left: 25),
-                      child: Image.asset(
-                        'images/Chateado.png',
-                        height: 40,
-                        width: 40,
+                    InkWell(
+                      onTap: () {
+                        _ouvinte(1);
+
+                        setState(() {
+                          _atualizarPergunta();
+                        });
+                      },
+                      child: Padding(
+                        padding: EdgeInsets.only(left: 25),
+                        child: Image.asset(
+                          _imgsEmoji['emoji2'],
+                          height: 40,
+                          width: 40,
+                        ),
                       ),
                     ),
                     Padding(
                         padding: EdgeInsets.only(left: 25),
-                        child: Text('Chateado')),
+                        child: Text(_emojis['emoji2'])),
                   ],
                 ),
                 Column(
                   children: <Widget>[
-                    Padding(
-                      padding: EdgeInsets.only(left: 25),
-                      child: Image.asset(
-                        'images/Normal.png',
-                        height: 40,
-                        width: 40,
+                    InkWell(
+                      child: InkWell(
+                        onTap: () {
+                          _ouvinte(2);
+                          setState(() {
+                            _atualizarPergunta();
+                          });
+                        },
+                        child: Padding(
+                          padding: EdgeInsets.only(left: 25),
+                          child: Image.asset(
+                            _imgsEmoji['emoji3'],
+                            height: 40,
+                            width: 40,
+                          ),
+                        ),
                       ),
                     ),
                     Padding(
                         padding: EdgeInsets.only(left: 25),
-                        child: Text('Triste')),
+                        child: Text(_emojis['emoji3'])),
                   ],
                 ),
                 Column(
                   children: <Widget>[
-                    Padding(
-                      padding: EdgeInsets.only(left: 25),
-                      child: Image.asset(
-                        'images/Feliz.png',
-                        height: 40,
-                        width: 40,
+                    InkWell(
+                      onTap: () {
+                        _ouvinte(3);
+                        setState(() {
+                          _atualizarPergunta();
+                        });
+                      },
+                      child: Padding(
+                        padding: EdgeInsets.only(left: 25),
+                        child: Image.asset(
+                          _imgsEmoji['emoji4'],
+                          height: 40,
+                          width: 40,
+                        ),
                       ),
                     ),
                     Padding(
                         padding: EdgeInsets.only(left: 25),
-                        child: Text('Feliz')),
+                        child: Text(_emojis['emoji4'])),
                   ],
                 ),
                 Column(
                   children: <Widget>[
-                    Padding(
-                      padding: EdgeInsets.only(left: 25),
-                      child: Image.asset(
-                        'images/Muito Feliz.png',
-                        height: 40,
-                        width: 40,
+                    InkWell(
+                      onTap: () {
+                        _ouvinte(4);
+                        setState(() {
+                          _atualizarPergunta();
+                        });
+                      },
+                      child: Padding(
+                        padding: EdgeInsets.only(left: 20),
+                        child: Image.asset(
+                          _imgsEmoji['emoji5'],
+                          height: 40,
+                          width: 40,
+                        ),
                       ),
                     ),
                     Padding(
-                        padding: EdgeInsets.only(left: 25),
-                        child: Text('Muito Feliz')),
+                        padding: EdgeInsets.only(left: 20),
+                        child: Text(_emojis['emoji5'])),
                   ],
                 ),
               ],

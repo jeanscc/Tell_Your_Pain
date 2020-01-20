@@ -48,6 +48,11 @@ flutter:
   # To add assets to your application, add an assets section, like this:
   assets:
     - images/Chateado.png
+    - images/trabalho.png
+    - images/familia.png
+    - images/relacionamento.png
+    - images/escola.png
+    - images/amigos.png
     - images/happz.jpg
     - images/Feliz.png
     - images/Muito Feliz.png

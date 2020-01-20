@@ -19,11 +19,11 @@ class MainPage extends StatelessWidget {
 
   click(int index, context) {
     if (index == 0) {
-      Navigator.of(context).pushReplacementNamed('/pages/pergunta_page');
+      Navigator.of(context).pushNamed('/pages/pergunta_page');
     } else if (index == 1) {
-      Navigator.of(context).pushReplacementNamed('/pages/avaliacao_page');
+      Navigator.of(context).pushNamed('/pages/avaliacao_page');
     } else if (index == 2) {
-      Navigator.of(context).pushReplacementNamed('/pages/chat_page');
+      Navigator.of(context).pushNamed('/pages/chat_page');
     } else if (index == 3) {
       FirebaseAuth.instance.signOut().then((user) {
         exit(0);
