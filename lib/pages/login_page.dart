@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
 class LoginPage extends StatefulWidget {
   static String tag = 'login_page';
@@ -7,13 +8,16 @@ class LoginPage extends StatefulWidget {
 }
 
 class _LoginPageState extends State<LoginPage> {
+  String _email;
+  String _senha;
+  final _scaffoldKey = GlobalKey<ScaffoldState>();
   @override
   Widget build(BuildContext context) {
     final logo = Hero(
       tag: 'hero',
       child: CircleAvatar(
         backgroundColor: Colors.transparent,
-        radius: 48.0,
+        radius: 60,
         child: Image.asset('images/happz.jpg'),
       ),
     );
@@ -21,24 +25,28 @@ class _LoginPageState extends State<LoginPage> {
     final email = TextFormField(
       keyboardType: TextInputType.emailAddress,
       autofocus: false,
+      onChanged: (value) {
+        setState(() {
+          _email = value;
+        });
+      },
       decoration: InputDecoration(
         hintText: 'Email',
         contentPadding: EdgeInsets.fromLTRB(20.0, 10.0, 20.0, 10.0),
-        border: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(32),
-        ),
       ),
     );
 
     final senha = TextFormField(
       autofocus: false,
       obscureText: true,
+      onChanged: (value) {
+        setState(() {
+          _senha = value;
+        });
+      },
       decoration: InputDecoration(
         hintText: 'Senha',
         contentPadding: EdgeInsets.fromLTRB(20.0, 10.0, 20.0, 10.0),
-        border: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(32),
-        ),
       ),
     );
 
@@ -50,7 +58,21 @@ class _LoginPageState extends State<LoginPage> {
         child: MaterialButton(
           minWidth: 200.0,
           height: 42.0,
-          onPressed: () {},
+          onPressed: () {
+            FirebaseAuth.instance
+                .signInWithEmailAndPassword(
+              email: _email,
+              password: _senha,
+            )
+                .then((user) {
+              Navigator.of(context).pop();
+              Navigator.of(context).pushReplacementNamed('/pages/home_page');
+            }).catchError((e) {
+              _scaffoldKey.currentState.showSnackBar(SnackBar(
+                content: Text('Email ou Senha Inválido'),
+              ));
+            });
+          },
           color: Colors.blueAccent,
           child: Text(
             'Log in',
@@ -63,12 +85,15 @@ class _LoginPageState extends State<LoginPage> {
     final cadastrar = FlatButton(
       child: Text(
         'Não tem uma conta? Cadastre-se',
-        style: TextStyle(color: Colors.blue),
+        style: TextStyle(color: Colors.blue, fontSize: 16),
       ),
-      onPressed: () {},
+      onPressed: () {
+        Navigator.of(context).pushNamed('/pages/cadastro_page');
+      },
     );
 
     return Scaffold(
+      key: _scaffoldKey,
       backgroundColor: Colors.white,
       body: Center(
         child: ListView(
