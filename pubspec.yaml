@@ -53,9 +53,10 @@ flutter:
     - images/relacionamento.png
     - images/escola.png
     - images/amigos.png
+    - images/saude.png
     - images/happz.jpg
     - images/Feliz.png
-    - images/Muito Feliz.png
+    - images/Muito_Feliz.png
     - images/Normal.png
     - images/Triste.png
     - images/icones_home/chat.png

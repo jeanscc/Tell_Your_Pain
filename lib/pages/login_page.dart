@@ -11,6 +11,7 @@ class _LoginPageState extends State<LoginPage> {
   String _email;
   String _senha;
   final _scaffoldKey = GlobalKey<ScaffoldState>();
+
   @override
   Widget build(BuildContext context) {
     final logo = Hero(

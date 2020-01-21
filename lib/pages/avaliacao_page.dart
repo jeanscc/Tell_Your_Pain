@@ -22,11 +22,13 @@ class AvaliacaoPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    print(MediaQuery.of(context).size.height);
+
     final logo = Hero(
       tag: 'hero',
       child: CircleAvatar(
         backgroundColor: Colors.transparent,
-        radius: 120,
+        radius: MediaQuery.of(context).size.width / 3,
         child: Image.asset('images/happz.jpg'),
       ),
     );
@@ -38,17 +40,18 @@ class AvaliacaoPage extends StatelessWidget {
           children: <Widget>[
             logo,
             SizedBox(
-              height: 100.0,
+              height: MediaQuery.of(context).size.height / 14,
             ),
             Padding(
-              padding: EdgeInsets.only(left: 30),
+              padding:
+                  EdgeInsets.only(left: MediaQuery.of(context).size.width / 11),
               child: Text(
                 'De uma maneira geral, Como você está se sentindo hoje?',
                 style: TextStyle(fontSize: 26),
               ),
             ),
             SizedBox(
-              height: 60.0,
+              height: MediaQuery.of(context).size.height / 8,
             ),
             Row(
               children: <Widget>[
@@ -58,11 +61,12 @@ class AvaliacaoPage extends StatelessWidget {
                     Navigator.of(context).pop();
                   },
                   child: Padding(
-                    padding: EdgeInsets.only(left: 50),
+                    padding: EdgeInsets.only(
+                        left: MediaQuery.of(context).size.width / 8.5),
                     child: Image.asset(
                       'images/Triste.png',
-                      height: 40,
-                      width: 40,
+                      height: MediaQuery.of(context).size.width / 10,
+                      width: MediaQuery.of(context).size.width / 10,
                     ),
                   ),
                 ),
@@ -72,11 +76,12 @@ class AvaliacaoPage extends StatelessWidget {
                     Navigator.of(context).pop();
                   },
                   child: Padding(
-                    padding: EdgeInsets.only(left: 25),
+                    padding: EdgeInsets.only(
+                        left: MediaQuery.of(context).size.width / 16),
                     child: Image.asset(
                       'images/Chateado.png',
-                      height: 40,
-                      width: 40,
+                      height: MediaQuery.of(context).size.width / 10,
+                      width: MediaQuery.of(context).size.width / 10,
                     ),
                   ),
                 ),
@@ -86,11 +91,12 @@ class AvaliacaoPage extends StatelessWidget {
                     Navigator.of(context).pop();
                   },
                   child: Padding(
-                    padding: EdgeInsets.only(left: 25),
+                    padding: EdgeInsets.only(
+                        left: MediaQuery.of(context).size.width / 16),
                     child: Image.asset(
                       'images/Normal.png',
-                      height: 40,
-                      width: 40,
+                      height: MediaQuery.of(context).size.width / 10,
+                      width: MediaQuery.of(context).size.width / 10,
                     ),
                   ),
                 ),
@@ -100,11 +106,12 @@ class AvaliacaoPage extends StatelessWidget {
                     Navigator.of(context).pop();
                   },
                   child: Padding(
-                    padding: EdgeInsets.only(left: 25),
+                    padding: EdgeInsets.only(
+                        left: MediaQuery.of(context).size.width / 16),
                     child: Image.asset(
                       'images/Feliz.png',
-                      height: 40,
-                      width: 40,
+                      height: MediaQuery.of(context).size.width / 10,
+                      width: MediaQuery.of(context).size.width / 10,
                     ),
                   ),
                 ),
@@ -114,11 +121,12 @@ class AvaliacaoPage extends StatelessWidget {
                     Navigator.of(context).pop();
                   },
                   child: Padding(
-                    padding: EdgeInsets.only(left: 25),
+                    padding: EdgeInsets.only(
+                        left: MediaQuery.of(context).size.width / 16),
                     child: Image.asset(
-                      'images/Muito Feliz.png',
-                      height: 40,
-                      width: 40,
+                      'images/Muito_Feliz.png',
+                      height: MediaQuery.of(context).size.width / 10,
+                      width: MediaQuery.of(context).size.width / 10,
                     ),
                   ),
                 ),

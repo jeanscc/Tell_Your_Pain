@@ -57,7 +57,7 @@ class MainPage extends StatelessWidget {
                   height: 40,
                 ),
                 Padding(
-                  padding: const EdgeInsets.all(20),
+                  padding: const EdgeInsets.all(6),
                   child: Text(
                     textos[index],
                     style: TextStyle(

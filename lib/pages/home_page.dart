@@ -7,7 +7,7 @@ class HomePage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Tell Your Pain'),
+        title: Text('HAppy'),
       ),
       backgroundColor: Color(0xFFF0F0F0),
       bottomNavigationBar: BottomNavigationBar(

@@ -24,7 +24,7 @@ class _PerguntaPageState extends State<PerguntaPage> {
     'emoji2': 'images/Chateado.png',
     'emoji3': 'images/Normal.png',
     'emoji4': 'images/Feliz.png',
-    'emoji5': 'images/Muito Feliz.png'
+    'emoji5': 'images/Muito_Feliz.png'
   };
 
   final _emojisName = [
@@ -42,7 +42,7 @@ class _PerguntaPageState extends State<PerguntaPage> {
     'Amigos',
     'Relacionamento',
     'Escola',
-    'Trabalho',
+    'Saúde',
   ];
 
   final Map<String, dynamic> _mapa = {
@@ -114,7 +114,7 @@ class _PerguntaPageState extends State<PerguntaPage> {
       _imgsEmoji['emoji2'] = 'images/amigos.png';
       _imgsEmoji['emoji3'] = 'images/relacionamento.png';
       _imgsEmoji['emoji4'] = 'images/escola.png';
-      _imgsEmoji['emoji5'] = 'images/trabalho.png';
+      _imgsEmoji['emoji5'] = 'images/saude.png';
       _emojis['emoji1'] = _emojisName3[0];
       _emojis['emoji2'] = _emojisName3[1];
       _emojis['emoji3'] = _emojisName3[2];
@@ -132,7 +132,7 @@ class _PerguntaPageState extends State<PerguntaPage> {
       tag: 'hero',
       child: CircleAvatar(
         backgroundColor: Colors.transparent,
-        radius: 120,
+        radius: MediaQuery.of(context).size.width / 3,
         child: Image.asset('images/happz.jpg'),
       ),
     );
@@ -144,17 +144,18 @@ class _PerguntaPageState extends State<PerguntaPage> {
           children: <Widget>[
             logo,
             SizedBox(
-              height: 100.0,
+              height: MediaQuery.of(context).size.height / 14,
             ),
             Padding(
-              padding: EdgeInsets.only(left: 45),
+              padding:
+                  EdgeInsets.only(left: MediaQuery.of(context).size.width / 11),
               child: Text(
                 _perguntaAtual,
                 style: TextStyle(fontSize: 26),
               ),
             ),
             SizedBox(
-              height: 60.0,
+              height: MediaQuery.of(context).size.height / 8,
             ),
             Row(
               children: <Widget>[
@@ -169,17 +170,24 @@ class _PerguntaPageState extends State<PerguntaPage> {
                         });
                       },
                       child: Padding(
-                        padding: EdgeInsets.only(left: 20),
+                        padding: EdgeInsets.only(
+                            left: MediaQuery.of(context).size.width / 10),
                         child: Image.asset(
                           _imgsEmoji['emoji1'],
-                          height: 40,
-                          width: 40,
+                          height: MediaQuery.of(context).size.width / 10,
+                          width: MediaQuery.of(context).size.width / 10,
                         ),
                       ),
                     ),
                     Padding(
-                        padding: EdgeInsets.only(left: 20),
-                        child: Text(_emojis['emoji1'])),
+                        padding: EdgeInsets.only(
+                            left: MediaQuery.of(context).size.width / 10,
+                            top: MediaQuery.of(context).size.width / 80),
+                        child: Text(
+                          _emojis['emoji1'],
+                          style: TextStyle(
+                              fontSize: MediaQuery.of(context).size.width / 35),
+                        )),
                   ],
                 ),
                 Column(
@@ -193,17 +201,24 @@ class _PerguntaPageState extends State<PerguntaPage> {
                         });
                       },
                       child: Padding(
-                        padding: EdgeInsets.only(left: 25),
+                        padding: EdgeInsets.only(
+                            left: MediaQuery.of(context).size.width / 18),
                         child: Image.asset(
                           _imgsEmoji['emoji2'],
-                          height: 40,
-                          width: 40,
+                          height: MediaQuery.of(context).size.width / 10,
+                          width: MediaQuery.of(context).size.width / 10,
                         ),
                       ),
                     ),
                     Padding(
-                        padding: EdgeInsets.only(left: 25),
-                        child: Text(_emojis['emoji2'])),
+                        padding: EdgeInsets.only(
+                            top: MediaQuery.of(context).size.width / 80,
+                            left: MediaQuery.of(context).size.width / 18),
+                        child: Text(
+                          _emojis['emoji2'],
+                          style: TextStyle(
+                              fontSize: MediaQuery.of(context).size.width / 35),
+                        )),
                   ],
                 ),
                 Column(
@@ -217,18 +232,25 @@ class _PerguntaPageState extends State<PerguntaPage> {
                           });
                         },
                         child: Padding(
-                          padding: EdgeInsets.only(left: 25),
+                          padding: EdgeInsets.only(
+                              left: MediaQuery.of(context).size.width / 18),
                           child: Image.asset(
                             _imgsEmoji['emoji3'],
-                            height: 40,
-                            width: 40,
+                            height: MediaQuery.of(context).size.width / 10,
+                            width: MediaQuery.of(context).size.width / 10,
                           ),
                         ),
                       ),
                     ),
                     Padding(
-                        padding: EdgeInsets.only(left: 25),
-                        child: Text(_emojis['emoji3'])),
+                        padding: EdgeInsets.only(
+                            top: MediaQuery.of(context).size.width / 80,
+                            left: MediaQuery.of(context).size.width / 18),
+                        child: Text(
+                          _emojis['emoji3'],
+                          style: TextStyle(
+                              fontSize: MediaQuery.of(context).size.width / 35),
+                        )),
                   ],
                 ),
                 Column(
@@ -241,17 +263,24 @@ class _PerguntaPageState extends State<PerguntaPage> {
                         });
                       },
                       child: Padding(
-                        padding: EdgeInsets.only(left: 25),
+                        padding: EdgeInsets.only(
+                            left: MediaQuery.of(context).size.width / 18),
                         child: Image.asset(
                           _imgsEmoji['emoji4'],
-                          height: 40,
-                          width: 40,
+                          height: MediaQuery.of(context).size.width / 10,
+                          width: MediaQuery.of(context).size.width / 10,
                         ),
                       ),
                     ),
                     Padding(
-                        padding: EdgeInsets.only(left: 25),
-                        child: Text(_emojis['emoji4'])),
+                        padding: EdgeInsets.only(
+                            top: MediaQuery.of(context).size.width / 80,
+                            left: MediaQuery.of(context).size.width / 18),
+                        child: Text(
+                          _emojis['emoji4'],
+                          style: TextStyle(
+                              fontSize: MediaQuery.of(context).size.width / 35),
+                        )),
                   ],
                 ),
                 Column(
@@ -264,17 +293,24 @@ class _PerguntaPageState extends State<PerguntaPage> {
                         });
                       },
                       child: Padding(
-                        padding: EdgeInsets.only(left: 20),
+                        padding: EdgeInsets.only(
+                            left: MediaQuery.of(context).size.width / 20),
                         child: Image.asset(
                           _imgsEmoji['emoji5'],
-                          height: 40,
-                          width: 40,
+                          height: MediaQuery.of(context).size.width / 10,
+                          width: MediaQuery.of(context).size.width / 10,
                         ),
                       ),
                     ),
                     Padding(
-                        padding: EdgeInsets.only(left: 20),
-                        child: Text(_emojis['emoji5'])),
+                        padding: EdgeInsets.only(
+                            top: MediaQuery.of(context).size.width / 80,
+                            left: MediaQuery.of(context).size.width / 20),
+                        child: Text(
+                          _emojis['emoji5'],
+                          style: TextStyle(
+                              fontSize: MediaQuery.of(context).size.width / 35),
+                        )),
                   ],
                 ),
               ],
