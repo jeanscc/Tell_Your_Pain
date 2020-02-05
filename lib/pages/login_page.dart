@@ -67,7 +67,11 @@ class _LoginPageState extends State<LoginPage> {
             )
                 .then((user) {
               Navigator.of(context).pop();
-              Navigator.of(context).pushReplacementNamed('/pages/home_page');
+              _email == 'admin@admin.com'
+                  ? Navigator.of(context).pushReplacementNamed(
+                      '/pages/admin_home_page/admin_home_page')
+                  : Navigator.of(context)
+                      .pushReplacementNamed('/pages/home_page');
             }).catchError((e) {
               _scaffoldKey.currentState.showSnackBar(SnackBar(
                 content: Text('Email ou Senha Inválido'),

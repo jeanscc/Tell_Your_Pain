@@ -149,9 +149,13 @@ class _PerguntaPageState extends State<PerguntaPage> {
             Padding(
               padding:
                   EdgeInsets.only(left: MediaQuery.of(context).size.width / 11),
-              child: Text(
-                _perguntaAtual,
-                style: TextStyle(fontSize: 26),
+              child: Container(
+                width: MediaQuery.of(context).size.width,
+                height: MediaQuery.of(context).size.height / 4,
+                child: Text(
+                  _perguntaAtual,
+                  style: TextStyle(fontSize: 26),
+                ),
               ),
             ),
             SizedBox(

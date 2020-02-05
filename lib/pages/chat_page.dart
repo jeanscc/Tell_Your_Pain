@@ -94,6 +94,7 @@ class _TextComposerState extends State<TextComposer> {
     DocumentSnapshot doc =
         await Firestore.instance.collection('users').document(user.uid).get();
     String nome = doc.data['nome'];
+    String url = doc.data['imgUrl'];
 
     Firestore.instance
         .collection('turmas')
@@ -103,6 +104,7 @@ class _TextComposerState extends State<TextComposer> {
       'texto': msg,
       'imgUrl': imgUrl,
       'sender': nome,
+      'senderImg': url,
       'createdAt': Timestamp.now()
     });
   }
@@ -186,6 +188,10 @@ class _TextComposerState extends State<TextComposer> {
 
 class ChatMessage extends StatelessWidget {
   final Map<String, dynamic> data;
+  NetworkImage retornarImg() {
+    NetworkImage net = NetworkImage(data['senderImg']);
+    return net;
+  }
 
   ChatMessage(this.data);
 
@@ -199,8 +205,9 @@ class ChatMessage extends StatelessWidget {
           Container(
             margin: const EdgeInsets.only(right: 16),
             child: CircleAvatar(
-              backgroundImage: AssetImage('images/icones_home/user.png'),
+              backgroundImage: retornarImg(),
               backgroundColor: Colors.transparent,
+              radius: 20,
             ),
           ),
           Expanded(
